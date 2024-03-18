@@ -329,9 +329,9 @@ class AirflowTask(object):
         op_args = {} if not "operator_args" in jsd else jsd["operator_args"]
         return cls(
             jsd["name"],
-            operator_type=jsd["operator_type"]
-            if "operator_type" in jsd
-            else "kubernetes",
+            operator_type=(
+                jsd["operator_type"] if "operator_type" in jsd else "kubernetes"
+            ),
             flow_name=flow_name,
         ).set_operator_args(**op_args)
 

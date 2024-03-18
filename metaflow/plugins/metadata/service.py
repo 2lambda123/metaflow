@@ -15,6 +15,7 @@ from metaflow.metadata.heartbeat import HB_URL_KEY
 from metaflow.sidecar import SidecarSubProcess
 from metaflow.sidecar_messages import MessageTypes, Message
 
+
 # Define message enums
 class HeartbeatTypes(object):
     RUN = 1
@@ -376,7 +377,7 @@ class ServiceMetadataProvider(MetadataProvider):
                         resp.status_code,
                         resp.text,
                     )
-            time.sleep(2 ** i)
+            time.sleep(2**i)
 
         if resp:
             raise ServiceException(
@@ -423,7 +424,7 @@ class ServiceMetadataProvider(MetadataProvider):
                         resp.status_code,
                         resp.text,
                     )
-            time.sleep(2 ** i)
+            time.sleep(2**i)
         if resp:
             raise ServiceException(
                 "Metadata request (%s) failed (code %s): %s"
