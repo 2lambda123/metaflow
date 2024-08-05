@@ -43,6 +43,7 @@ BASH_MFLOG = (
 BASH_SAVE_LOGS_ARGS = ["python", "-m", "metaflow.mflog.save_logs"]
 BASH_SAVE_LOGS = " ".join(BASH_SAVE_LOGS_ARGS)
 
+
 # this function returns a bash expression that redirects stdout
 # and stderr of the given bash expression to mflog.tee
 def bash_capture_logs(bash_expr, var_transform=None):

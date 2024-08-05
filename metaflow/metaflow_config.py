@@ -64,16 +64,20 @@ DATASTORE_SYSROOT_S3 = from_conf("METAFLOW_DATASTORE_SYSROOT_S3")
 DATATOOLS_SUFFIX = from_conf("METAFLOW_DATATOOLS_SUFFIX", "data")
 DATATOOLS_S3ROOT = from_conf(
     "METAFLOW_DATATOOLS_S3ROOT",
-    os.path.join(from_conf("METAFLOW_DATASTORE_SYSROOT_S3"), DATATOOLS_SUFFIX)
-    if from_conf("METAFLOW_DATASTORE_SYSROOT_S3")
-    else None,
+    (
+        os.path.join(from_conf("METAFLOW_DATASTORE_SYSROOT_S3"), DATATOOLS_SUFFIX)
+        if from_conf("METAFLOW_DATASTORE_SYSROOT_S3")
+        else None
+    ),
 )
 # Local datatools root location
 DATATOOLS_LOCALROOT = from_conf(
     "METAFLOW_DATATOOLS_LOCALROOT",
-    os.path.join(from_conf("METAFLOW_DATASTORE_SYSROOT_LOCAL"), DATATOOLS_SUFFIX)
-    if from_conf("METAFLOW_DATASTORE_SYSROOT_LOCAL")
-    else None,
+    (
+        os.path.join(from_conf("METAFLOW_DATASTORE_SYSROOT_LOCAL"), DATATOOLS_SUFFIX)
+        if from_conf("METAFLOW_DATASTORE_SYSROOT_LOCAL")
+        else None
+    ),
 )
 
 # The root directory to save artifact pulls in, when using S3
@@ -84,9 +88,11 @@ DATASTORE_CARD_SUFFIX = "mf.cards"
 DATASTORE_CARD_LOCALROOT = from_conf("METAFLOW_CARD_LOCALROOT")
 DATASTORE_CARD_S3ROOT = from_conf(
     "METAFLOW_CARD_S3ROOT",
-    os.path.join(from_conf("METAFLOW_DATASTORE_SYSROOT_S3"), DATASTORE_CARD_SUFFIX)
-    if from_conf("METAFLOW_DATASTORE_SYSROOT_S3")
-    else None,
+    (
+        os.path.join(from_conf("METAFLOW_DATASTORE_SYSROOT_S3"), DATASTORE_CARD_SUFFIX)
+        if from_conf("METAFLOW_DATASTORE_SYSROOT_S3")
+        else None
+    ),
 )
 CARD_NO_WARNING = from_conf("METAFLOW_CARD_NO_WARNING", False)
 

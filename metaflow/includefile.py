@@ -22,6 +22,7 @@ except:
     # python3
     from urllib.parse import urlparse
 
+
 # TODO: This local "client" and the general notion of dataclients should probably
 # be moved somewhere else. Putting here to keep this change compact for now
 class MetaflowLocalURLException(MetaflowException):
@@ -126,9 +127,9 @@ class Local(object):
 
     def _path(self, key):
         key = to_unicode(key)
-        if key.startswith(u"local://"):
+        if key.startswith("local://"):
             return key[8:]
-        elif key[0] != u"/":
+        elif key[0] != "/":
             if current.is_running_flow:
                 raise MetaflowLocalURLException(
                     "Specify Local(run=self) when you use Local inside a running "
@@ -145,7 +146,7 @@ class Local(object):
 
     def get(self, key=None, return_missing=False):
         p = self._path(key)
-        url = u"local://%s" % p
+        url = "local://%s" % p
         if not os.path.isfile(p):
             if return_missing:
                 p = None
@@ -159,7 +160,7 @@ class Local(object):
             Local._makedirs(os.path.dirname(p))
             with open(p, "wb") as f:
                 f.write(obj)
-        return u"local://%s" % p
+        return "local://%s" % p
 
 
 # From here on out, this is the IncludeFile implementation.
@@ -190,7 +191,7 @@ class LocalFile:
                 )
             path = decoded_value["url"]
         for prefix, handler in DATACLIENTS.items():
-            if path.startswith(u"%s://" % prefix):
+            if path.startswith("%s://" % prefix):
                 return True, Uploader(handler), None
         try:
             with open(path, mode="r") as _:
@@ -224,6 +225,7 @@ class LocalFile:
 
 class FilePathClass(click.ParamType):
     name = "FilePath"
+
     # The logic for this class is as follows:
     #  - It will always return a path that indicates the persisted path of the file.
     #    + If the value is already such a string, nothing happens and it returns that same value
@@ -285,11 +287,11 @@ class IncludeFile(Parameter):
                     name,
                     str,
                     "default",
-                    lambda ctx, full_evaluation, o=o: LocalFile(
-                        o["is_text"], o["encoding"], o["url"]
-                    )(ctx)
-                    if full_evaluation
-                    else json.dumps(o),
+                    lambda ctx, full_evaluation, o=o: (
+                        LocalFile(o["is_text"], o["encoding"], o["url"])(ctx)
+                        if full_evaluation
+                        else json.dumps(o)
+                    ),
                     print_representation=v,
                 )
             else:
