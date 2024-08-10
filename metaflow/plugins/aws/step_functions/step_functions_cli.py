@@ -421,9 +421,7 @@ def trigger(obj, run_id_file=None, **kwargs):
         return (
             json.dumps(val)
             if param.kwargs.get("type") == JSONType
-            else val()
-            if callable(val)
-            else val
+            else val() if callable(val) else val
         )
 
     params = {

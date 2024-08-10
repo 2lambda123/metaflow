@@ -106,9 +106,9 @@ def create_k8s_args(
 
     k8s_operator_args = dict(
         namespace=namespace,
-        service_account_name=KUBERNETES_SERVICE_ACCOUNT
-        if service_account is None
-        else service_account,
+        service_account_name=(
+            KUBERNETES_SERVICE_ACCOUNT if service_account is None else service_account
+        ),
         node_selector=node_selector,
         cmds=k8s._command(
             code_package_url=code_package_url,
